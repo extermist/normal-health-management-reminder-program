@@ -1,0 +1,45 @@
+from pygame import mixer
+from datetime import datetime
+from time import time
+
+def musiconloop(file, stopper):
+    mixer.init()
+    mixer.music.load(file)
+    mixer.music.play()
+    while True:
+        input_of_user=input()
+        if input_of_user==stopper:
+            mixer.music.stop()
+            break
+
+def log_file(msg):
+    with open("mylogs.txt") as f:
+        f.write(f"{msg} {datetime.now()} \n")
+
+
+if __name__ == '__main__':
+    init_water=time()
+    init_eye=time()
+    init_exersise=time()
+    watersecs = 10
+    exsecs = 30
+    eyessecs = 40
+    while True:
+        if time() - init_water > watersecs:
+            print("Water Drinking time. Enter 'drank' to stop the alarm.")
+            musiconloop('water.mp3', 'drank')
+            init_water = time()
+            log_file("Drank Water at")
+
+        if time() - init_eye > eyessecs:
+            print("Water Drinking time. Enter 'drank' to stop the alarm.")
+            musiconloop('Eyes.mp3', 'done')
+            init_eye = time()
+            log_file("Eye exersise at")
+
+        if time() - init_exersise > exsecs:
+            print("Water Drinking time. Enter 'drank' to stop the alarm.")
+            musiconloop('Exersise.mp3', 'done')
+            init_exersise = time()
+            log_file("exersise done at")
+
